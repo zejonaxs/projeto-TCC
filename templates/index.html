@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block conteudo %}
+    {% include 'partils/alerta.html' %}
+    <div class="page-header text-center py-3">
+        <h1>TCCs:</h1>
+        <hr>
+    </div>
+    <div class="row no-flex">
+        {% for tcc in object_list %}
+        <div class="tcc-card">
+            <a href="{% url 'detalhar_tcc' tcc.id %}">
+                <h2>{{ tcc.titulo }}</h2>
+                <p class="tcc-info">
+                    <span><i class="fa-solid fa-user"></i>Autor: {{ tcc.autor }}</span>
+                    <span><i class="fa fa-mortar-board"></i>Curso: {{ tcc.curso }}</span>
+                    <span><i class="fa-solid fa-calendar"></i>Ano: {{ tcc.ano_do_documento}}</span>
+                    </p>
+                <p>{{ tcc.resumo }}</p>
+                <p class="small">Palavras chave: {{ tcc.palavras_chave }}</p>
+            </a>
+        </div>
+        {% empty %}
+        <p>Nenhum tcc registrado.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>{{ tcc.titulo }}
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static 'css/style-tcc.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+{% endblock head %}
+
+{% block conteudo %}
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar " style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="{{ tcc.autor.foto.url}}" style="width:45%;" class="w3-round"><br><br>
+    <h4><i class="fa-solid fa-user"></i><b>{{ tcc.autor.nome}}</b> {{ tcc.autor.ultimo_nome }}</h4>
+    <hr>
+    <h4><i class="fa-solid fa-chalkboard-user"></i><b>{{ tcc.orientador.nome}}</b> {{ tcc.orientador.ultimo_nome }}</h4>
+    <a href="{{ tcc.orientador.link_do_curriculo_lattes }}">currículo lattes</a>
+    <hr>
+    <h4><i class="fa fa-mortar-board"></i><b>{{ tcc.curso.nome }}</b> {{ tcc.curso.modalidade }}</h4>
+  </div>
+</nav>
+
+
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <header id="portfolio">
+    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+    <h1><b>{{ tcc.titulo }}</b></h1>
+    <div class="w3-section w3-bottombar w3-padding-16">
+    </div>
+    </div>
+  </header>
+
+  <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+    <h4><b>Resumo: </b>{{ tcc.resumo }}</h4>
+    <i class="fa-solid fa-calendar"></i>Ano: {{ tcc.ano_do_documento}}
+    <p>Palavras chave: {{ tcc.palavras_chave }}</p>
+    <hr>
+
+    <h4>TRABALHO DE CONCLUSÃO DE CURSO</h4>
+    <a href="{{ tcc.arquivo_do_documento.url }}">
+      <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
+        <i class="fa fa-download w3-margin-right"></i> Baixar TCC
+      </button>
+    </a>
+
+{% endblock conteudo %}

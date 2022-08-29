@@ -1,0 +1,51 @@
+footer {
+    clear: both;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: auto 0;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    /* overflow-y: hidden; */
+}
+
+body {
+    margin: 0 0 120px;
+}
+
+form * {
+    max-width: 80vw;
+    margin: auto;
+}
+
+.row {
+    max-width: 100%;
+}
+
+.no-flex {
+    display: block;
+}
+
+.tcc-card {
+    width: 50%;
+    margin: auto;
+    color: gray !important;
+    padding: 0 0 15px 0;
+    margin-bottom: 10px;
+    border-bottom: solid 1px gray;
+    text-align: justify;
+}
+
+.tcc-card a {
+    text-decoration: none;
+    color: gray;
+}
+
+.tcc-info {
+    display: grid;
+    grid-template-columns: repeat(3, 43.5%);
+}

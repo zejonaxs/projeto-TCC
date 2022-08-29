@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>Usuários - Repositório digital</title>
+{% endblock %}
+{% block conteudo %}
+    {% include 'partils/alerta.html' %}
+    <div>
+        <h2>Lista de Usuários
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'criar_autor' %}" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Adicionar Usuário</a>
+        {% endif %}
+        </h2>
+        <hr>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped" id="tabela-listar">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    {% if request.user.is_authenticated %}
+                    <th scope="col">Ações</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in object_list %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    {% if request.user.is_authenticated %}
+                    <td>
+                        <a href="{% url 'editar_usuario' user.pk %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
+                        <a href="{% url 'deletar_usuario' user.pk %}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Excluir</a>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Nenhum(a) usuário(a) registrado(a).</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

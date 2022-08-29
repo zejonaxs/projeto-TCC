@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>Tcc - Repositório digital</title>
+{% endblock %}
+{% block conteudo %}
+    {% include 'partils/alerta.html' %}
+    <div>
+        <h2>Lista de Tccs
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'criar_tcc' %}" class="btn btn-primary float-end"><i class="bi bi-plus-lg"></i> Adicionar tcc</a>
+        {% endif %}
+        </h2>
+        <hr>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped" id="tabela-listar">
+            <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Orientador</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Ano do documento</th>
+                    <th scope="col">Resumo</th>
+                    <th scope="col">Arquivo do documento</th>
+                    <th scope="col">Palavras chave</th>
+                    {% if request.user.is_authenticated %}
+                    <th scope="col">Ações</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for tcc in object_list %}
+                <tr>
+                    <td>{{ tcc.titulo }}</td>
+                    <td>{{ tcc.autor }}</td>
+                    <td>{{ tcc.orientador }}</td>
+                    <td>{{ tcc.curso }}</td>
+                    <td>{{ tcc.ano_do_documento }}</td>
+                    <td>{{ tcc.resumo }}</td>
+                    <td>{{ tcc.arquivo_do_documento }}</td>
+                    <td>{{ tcc.palavras_chave }}</td>
+                    
+                    {% if request.user.is_authenticated %}
+                    <td>
+                        <a href="{% url 'editar_tcc' tcc.pk %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
+                        <a href="{% url 'deletar_tcc' tcc.pk %}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Excluir</a>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Nenhum(a) tcc registrado(a).</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
